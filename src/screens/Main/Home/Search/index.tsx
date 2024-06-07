@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import { Image, TextInput, View } from 'react-native';
-import { colors } from '../../../../constants/colors';
-import { images } from '../../../../constants/icons';
-import { styles } from './styles';
+import {Image, TextInput, View} from 'react-native';
+import {colors} from '../../../../constants/colors';
+import {images} from '../../../../constants/icons';
+import {styles} from './styles';
 
 const Search = () => {
-    const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
     <View style={styles.searchInner}>
       <View style={styles.search}>
@@ -21,6 +21,5 @@ const Search = () => {
     </View>
   );
 };
-
 
 export default Search;

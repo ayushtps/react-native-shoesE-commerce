@@ -1,3 +1,4 @@
+import Payment from '../component/Payment';
 import ProductDetail from '../component/ProductDetail';
 import SearchScreen from '../component/SearchScreen';
 import Intro from '../screens/Auth/IntroSlide';
@@ -58,7 +59,12 @@ export const mainStack = [
   },
   {
     id: 5,
-    name: 'Drawer',
+    name: SCREENS.PAYMENT,
+    component: Payment,
+  },
+  {
+    id: 6,
+    name: 'App',
     component: AppDrawer,
   },
 ];

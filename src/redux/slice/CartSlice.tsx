@@ -28,12 +28,11 @@ const CartSlice = createSlice({
       }
     },
     deleteCart(state, action) {
-      let index = state.data.findIndex(x => x.id == action.payload)
-      state.data.splice(index, 1)
-  },
+      state.data = state.data.filter(x => x.id !== action.payload.id);
+    },
   },
 });
 
-export const {addCart,decItem,deleteCart} = CartSlice.actions;
+export const {addCart, decItem, deleteCart} = CartSlice.actions;
 
 export default CartSlice.reducer;

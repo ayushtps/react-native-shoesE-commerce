@@ -6,6 +6,7 @@ import {colors} from './src/constants/colors';
 import store from './src/redux/store/store';
 import RootNavigation from './src/rootnavigations';
 import SplashScreen from './src/component/SplashScreen';
+import {PaperProvider} from 'react-native-paper';
 
 export const AuthenticatedUserContext = createContext({});
 
@@ -26,12 +27,14 @@ const App = () => {
   }, 2000);
   return (
     <Provider store={store}>
-      <View style={{flex: 1}}>
-        <StatusBar backgroundColor={colors.primaryColor} />
-        <AuthenticatedProvider>
-          {splash ? <SplashScreen /> : <RootNavigation />}
-        </AuthenticatedProvider>
-      </View>
+      <PaperProvider>
+        <View style={{flex: 1}}>
+          <StatusBar backgroundColor={colors.primaryColor} />
+          <AuthenticatedProvider>
+            {splash ? <SplashScreen /> : <RootNavigation />}
+          </AuthenticatedProvider>
+        </View>
+      </PaperProvider>
     </Provider>
   );
 };

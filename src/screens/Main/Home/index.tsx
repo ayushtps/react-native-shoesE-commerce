@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { FlatList, Image, Pressable, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import {FlatList, Image, Pressable, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useDispatch, useSelector} from 'react-redux';
 import CategoryWiseItem from '../../../component/CategoryWiseItem';
 import Typography from '../../../component/common/Typography';
-import { colors } from '../../../constants/colors';
-import { categoryList } from '../../../constants/data';
-import { fonts } from '../../../constants/fonts';
-import { images } from '../../../constants/icons';
-import { categorySelect } from '../../../redux/slice/CategorySlice';
-import { RootState } from '../../../redux/store/store';
+import {colors} from '../../../constants/colors';
+import {categoryList} from '../../../constants/data';
+import {fonts} from '../../../constants/fonts';
+import {images} from '../../../constants/icons';
+import {categorySelect} from '../../../redux/slice/CategorySlice';
+import {RootState} from '../../../redux/store/store';
 import Search from './Search';
-import { styles } from './styles';
+import {styles} from './styles';
 import { DrawerActions } from '@react-navigation/native';
 
 const renderItem = ({item, isSelected, onPress}: any) => {
@@ -84,7 +84,7 @@ const Home = ({navigation}: any) => {
           <Image source={images.HEADER_CART_ICON} />
         </Pressable>
       </View>
-      <Search/>
+      <Search />
       <View style={styles.categoryContainer}>
         <FlatList
           data={categoryList}
@@ -100,9 +100,9 @@ const Home = ({navigation}: any) => {
           ItemSeparatorComponent={() => (
             <View style={{marginHorizontal: 10}}></View>
           )}
-          ListEmptyComponent={()=>(
+          ListEmptyComponent={() => (
             <View style={styles.emptyView}>
-              <Image source={images.EMPTY_LOGO}/>
+              <Image source={images.EMPTY_LOGO} />
             </View>
           )}
         />
@@ -126,7 +126,5 @@ const Home = ({navigation}: any) => {
     </KeyboardAwareScrollView>
   );
 };
-
-
 
 export default Home;

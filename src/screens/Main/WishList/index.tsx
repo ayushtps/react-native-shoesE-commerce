@@ -6,7 +6,7 @@ import Header from '../../../component/layout/Header';
 import { colors } from '../../../constants/colors';
 import { fonts } from '../../../constants/fonts';
 import { images } from '../../../constants/icons';
-import { DeleteWish } from '../../../redux/slice/WishListSlice';
+import { deleteWish } from '../../../redux/slice/WishListSlice';
 import { RootState } from '../../../redux/store/store';
 import { styles } from './styles';
 
@@ -15,7 +15,8 @@ const WishList = () => {
   const dispatch = useDispatch();
 
   const removeWish = (item: any) => {
-    dispatch(DeleteWish(item));
+    dispatch(deleteWish(item));
+    
   };
   const renderItem = ({item}: any) => {
     return (
@@ -66,9 +67,14 @@ const WishList = () => {
           ItemSeparatorComponent={() => (
             <View style={{marginVertical: 10}}></View>
           )}
-          ListEmptyComponent={()=>(
+          ListEmptyComponent={() => (
             <View style={styles.emptyView}>
-              <Image source={images.EMPTY_LOGO}/>
+              <Image source={images.EMPTY_LOGO} />
+              <Typography
+                title={'Empty'}
+                color={colors.peraTextColor}
+                size={16}
+              />
             </View>
           )}
         />
@@ -76,7 +82,5 @@ const WishList = () => {
     </View>
   );
 };
-
-
 
 export default WishList;

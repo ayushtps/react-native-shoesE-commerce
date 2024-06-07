@@ -54,13 +54,13 @@ export const styles = StyleSheet.create({
     alignContent: 'space-between',
   },
   trush: {
-    marginTop: 30,
+    marginTop: 10,
   },
   totalContainer: {
     backgroundColor: colors.secondColor,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    padding: 24,
+    padding: 20,
   },
   totalInner: {
     flexDirection: 'row',
@@ -76,6 +76,6 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colors.peraTextColor,
     borderStyle: 'dotted',
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });

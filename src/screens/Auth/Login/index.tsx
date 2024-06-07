@@ -1,14 +1,14 @@
 import auth from '@react-native-firebase/auth';
-import React, { useState } from 'react';
-import { Alert, Image, Pressable, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import React, {useState} from 'react';
+import {Alert, Image, Pressable, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Button from '../../../component/common/Button';
 import Inputs from '../../../component/common/Input';
 import Typography from '../../../component/common/Typography';
-import { colors } from '../../../constants/colors';
-import { fonts } from '../../../constants/fonts';
-import { images } from '../../../constants/icons';
-import { styles } from './styles';
+import {colors} from '../../../constants/colors';
+import {fonts} from '../../../constants/fonts';
+import {images} from '../../../constants/icons';
+import {styles} from './styles';
 
 const Login = ({navigation}: any) => {
   const [userEmail, setUserEmail] = useState('');
@@ -110,7 +110,5 @@ const Login = ({navigation}: any) => {
     </KeyboardAwareScrollView>
   );
 };
-
-
 
 export default Login;

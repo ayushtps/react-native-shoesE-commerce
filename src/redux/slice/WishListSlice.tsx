@@ -21,13 +21,12 @@ const WishListSlice = createSlice({
         state.data.push(temp);
       }
     },
-    DeleteWish(state, action) {
-      let index = state.data.findIndex(x => x.id == action.payload)
-      state.data.splice(index, 1)
-  },
+    deleteWish(state, action) {
+      state.data = state.data.filter(x => x.id !== action.payload.id);
+    },
   },
 });
 
-export const {addWish,DeleteWish} = WishListSlice.actions;
+export const {addWish, deleteWish} = WishListSlice.actions;
 
 export default WishListSlice.reducer;

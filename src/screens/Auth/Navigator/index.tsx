@@ -1,9 +1,8 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import { authStackNav } from '../../../constants/navigations';
+import {authStackNav} from '../../../constants/navigations';
 
 const Stack = createStackNavigator();
-
 
 const AuthStack = () => {
   return (
@@ -19,8 +18,5 @@ const AuthStack = () => {
     </Stack.Navigator>
   );
 };
-
-
-
 
 export default AuthStack;

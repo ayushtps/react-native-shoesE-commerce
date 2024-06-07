@@ -11,4 +11,5 @@ export const SCREENS ={
     PROFILE:'Profile',
     PRODUCT_DETAILS:'ProductDetail',
     SEARCH_SCREEN:'SearchScreen',
+    PAYMENT:'Payment',
 }

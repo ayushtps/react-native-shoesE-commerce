@@ -3,11 +3,11 @@ import {
   GestureResponderEvent,
   Pressable,
   StyleSheet,
-  TextStyle
+  TextStyle,
 } from 'react-native';
-import { colors } from '../../../constants/colors';
+import {colors} from '../../../constants/colors';
 import Typography from '../Typography';
-import { fonts } from '../../../constants/fonts';
+import {fonts} from '../../../constants/fonts';
 
 type buttonProps = {
   style?: TextStyle | TextStyle[];
@@ -32,7 +32,7 @@ const buttonStyles = () =>
   StyleSheet.create({
     textAlign: {
       fontSize: 18,
-      fontFamily:fonts.medium
+      fontFamily: fonts.medium,
     },
     buttonContainer: {
       backgroundColor: colors.buttonColor,

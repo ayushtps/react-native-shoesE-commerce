@@ -1,20 +1,22 @@
-import React from 'react';
-import { FlatList, Image, Pressable, View } from 'react-native';
-import Toast from 'react-native-toast-message';
-import { useDispatch, useSelector } from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Image, Pressable, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import Button from '../../../component/common/Button';
 import Typography from '../../../component/common/Typography';
 import Header from '../../../component/layout/Header';
-import { colors } from '../../../constants/colors';
-import { fonts } from '../../../constants/fonts';
-import { images } from '../../../constants/icons';
-import { addCart, decItem, deleteCart } from '../../../redux/slice/CartSlice';
-import { RootState } from '../../../redux/store/store';
-import { styles } from './styles';
+import {colors} from '../../../constants/colors';
+import {fonts} from '../../../constants/fonts';
+import {images} from '../../../constants/icons';
+import {addCart, decItem, deleteCart} from '../../../redux/slice/CartSlice';
+import {RootState} from '../../../redux/store/store';
+import {styles} from './styles';
 
 const CartList = () => {
+  const navigation = useNavigation();
   const {data} = useSelector((state: RootState) => state.addCart);
   const dispatch = useDispatch();
+  const [Price, setPrice] = useState(0);
 
   const handleQtyIncrement = (item: any) => {
     dispatch(addCart(item));
@@ -28,14 +30,20 @@ const CartList = () => {
     dispatch(deleteCart(item));
   };
 
-  const handleBtn = () =>{
-    
-    Toast.show({
-      type: 'success',
-      text1: 'Hello',
-      text2: 'Item add in cart'
+  const handleBtn = () => {
+    navigation.navigate('Payment', {price: Price});
+  };
+
+  const Total = () => {
+    let totalPrice = 0;
+    data.map((x, i) => {
+      totalPrice = Math.floor(x.price) * x.qty + totalPrice;
     });
-  }
+    setPrice(totalPrice);
+  };
+  useEffect(() => {
+    Total();
+  }, [Total]);
 
   const renderItem = ({item}: any) => {
     return (
@@ -52,7 +60,7 @@ const CartList = () => {
             />
             <Typography
               size={14}
-              title={item.price}
+              title={`$ ${item.price}`}
               textStyle={styles.txtStyles}
             />
             <View style={styles.addRemove}>
@@ -82,6 +90,7 @@ const CartList = () => {
           </View>
           <View style={styles.lastItem}>
             <Typography size={16} title={'L'} textStyle={styles.txtStyles} />
+            <Typography title={Math.floor(item.price * item.qty)} size={16} />
             <Pressable onPress={() => deleteCartItem(item)}>
               <Image source={images.TRUSH_ICON} style={styles.trush} />
             </Pressable>
@@ -104,9 +113,16 @@ const CartList = () => {
             ItemSeparatorComponent={() => (
               <View style={{marginVertical: 10}}></View>
             )}
-            ListEmptyComponent={()=>(
+            ListEmptyComponent={() => (
               <View style={styles.emptyView}>
-                <Image source={images.EMPTYCART_LOGO}/>
+                <Image source={images.EMPTYCART_LOGO} />
+                <Pressable onPress={() => navigation.navigate('Home')}>
+                  <Typography
+                    title={'Continue to shopping'}
+                    color={colors.peraTextColor}
+                    size={16}
+                  />
+                </Pressable>
               </View>
             )}
           />
@@ -122,7 +138,7 @@ const CartList = () => {
           <Typography
             size={18}
             color={colors.headingTextColor}
-            title={'$1250.00'}
+            title={`$ ${Price}`}
           />
         </View>
         <View style={[styles.totalInner, styles.extra]}>
@@ -134,7 +150,7 @@ const CartList = () => {
           <Typography
             size={18}
             color={colors.headingTextColor}
-            title={'$40.90'}
+            title={Price ? '$40.90' : 0}
           />
         </View>
         <View style={styles.totalInner}>
@@ -146,15 +162,17 @@ const CartList = () => {
           <Typography
             size={18}
             color={colors.headingTextColor}
-            title={'$1690.99'}
+            title={Price ? `$ ${Price + 40}` : 0}
           />
         </View>
-        <Button title={'Payment'} style={{marginTop:10}} onPress={handleBtn}/>
+        <Button
+          title={'Checkout'}
+          style={{marginTop: 10}}
+          onPress={handleBtn}
+        />
       </View>
     </View>
   );
 };
-
-
 
 export default CartList;

@@ -1,16 +1,20 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { colors } from '../../constants/colors';
-import { images } from '../../constants/icons';
-
-
+import {colors} from '../../constants/colors';
+import {images} from '../../constants/icons';
 
 const SplashScreen = () => {
   return (
     <View style={styles.container}>
-      <Animatable.View animation="bounceIn" iterationCount={2} direction="alternate">
-        <Image source={images.SPLASH_LOGO} resizeMode='cover' tintColor={colors.buttonColor}/>
+      <Animatable.View
+        animation="bounceIn"
+        iterationCount={2}
+        direction="alternate">
+        <Image
+          source={images.SPLASH_LOGO}
+          resizeMode="cover"
+        />
       </Animatable.View>
     </View>
   );

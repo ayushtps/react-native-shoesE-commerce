@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {colors} from '../../../constants/colors';
-import { fonts } from '../../../constants/fonts';
+import {fonts} from '../../../constants/fonts';
 
 type inputProps = {
   inputStyle?: TextStyle | TextStyle[];
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     fontSize: 14,
     paddingHorizontal: 14,
-    paddingVertical:14,
+    paddingVertical: 14,
     color: colors.headingTextColor,
     backgroundColor: colors.secondColor,
-    fontFamily:fonts.regular
+    fontFamily: fonts.regular,
   },
 });
 

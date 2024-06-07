@@ -1,20 +1,20 @@
 import React from 'react';
-import { Image, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { colors } from '../../constants/colors';
-import { images } from '../../constants/icons';
-import { addCart } from '../../redux/slice/CartSlice';
+import {Image, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {colors} from '../../constants/colors';
+import {images} from '../../constants/icons';
+import {addCart} from '../../redux/slice/CartSlice';
 import Button from '../common/Button';
 import Typography from '../common/Typography';
 import Header from '../layout/Header';
-import { styles } from './styles';
+import {styles} from './styles';
 
 const ProductDetail = ({route}: any) => {
   const {product} = route.params;
-  const dispatch = useDispatch()
-  const addCartHandle = () =>{
-    dispatch(addCart(product))
-  }
+  const dispatch = useDispatch();
+  const addCartHandle = () => {
+    dispatch(addCart(product));
+  };
 
   return (
     <View style={styles.productDetails}>
@@ -25,7 +25,7 @@ const ProductDetail = ({route}: any) => {
         <Image source={product.image} height={311} width={202} />
       </View>
       <View style={styles.detailsContainer}>
-        <View style={{padding:20}}>
+        <View style={{padding: 20}}>
           <View>
             <Typography
               title={'BEST SELLER'}
@@ -168,14 +168,16 @@ const ProductDetail = ({route}: any) => {
             />
           </View>
           <View>
-            <Button title={'Add To Cart'} style={styles.cartBtn} onPress={addCartHandle} />
+            <Button
+              title={'Add To Cart'}
+              style={styles.cartBtn}
+              onPress={addCartHandle}
+            />
           </View>
         </View>
       </View>
     </View>
   );
 };
-
-
 
 export default ProductDetail;

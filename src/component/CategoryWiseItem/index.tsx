@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { colors } from '../../constants/colors';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Image, Pressable, TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {colors} from '../../constants/colors';
 import {
   adidasNewShoesList,
   adidasPopularShoesList,
@@ -15,18 +15,18 @@ import {
   underNewShoesList,
   underPopularShoesList,
 } from '../../constants/data';
-import { fonts } from '../../constants/fonts';
-import { images } from '../../constants/icons';
-import { addCart } from '../../redux/slice/CartSlice';
-import { addWish } from '../../redux/slice/WishListSlice';
-import { RootState } from '../../redux/store/store';
+import {fonts} from '../../constants/fonts';
+import {images} from '../../constants/icons';
+import {addCart} from '../../redux/slice/CartSlice';
+import {addWish} from '../../redux/slice/WishListSlice';
+import {RootState} from '../../redux/store/store';
 import Typography from '../common/Typography';
-import { styles } from './styles';
+import {styles} from './styles';
 
 const CategoryWiseItem = () => {
   const navigation = useNavigation();
   const {data} = useSelector((state: RootState) => state.category);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const [renderItem1, setRenderItem1] = useState(nikePopularShoesList);
   const [renderItem2, setRenderItem2] = useState(nikeNewShoesList);
@@ -52,14 +52,13 @@ const CategoryWiseItem = () => {
     }
   }, [data]);
 
+  const addCartHandle = (item: any) => {
+    dispatch(addCart(item));
+  };
 
-  const addCartHandle = (item:any) =>{
-    dispatch(addCart(item))
-  }
-
-  const addWishhandle = (item:any) =>{
-    dispatch(addWish(item))
-  }
+  const addWishhandle = (item: any) => {
+    dispatch(addWish(item));
+  };
 
   const renderItem = ({item}: any) => {
     return (
@@ -67,8 +66,10 @@ const CategoryWiseItem = () => {
         style={styles.itemContainer}
         onPress={() => navigation.navigate('ProductDetail', {product: item})}>
         <View style={styles.imgContainer}>
-          <Pressable style={styles.wishListContainer} onPress={() => addWishhandle(item)}>
-            <Image source={images.MINIHEART_ICON}/>
+          <Pressable
+            style={styles.wishListContainer}
+            onPress={() => addWishhandle(item)}>
+            <Image source={images.MINIHEART_ICON} />
           </Pressable>
           <Image source={item.image} />
         </View>
@@ -87,11 +88,13 @@ const CategoryWiseItem = () => {
         </View>
         <View style={styles.bottomCart}>
           <Typography
-            title={item.price}
+            title={`$ ${item.price}`}
             size={14}
             textStyle={styles.priceText}
           />
-          <TouchableOpacity style={styles.addCartBtn} onPress={()=>addCartHandle(item)}>
+          <TouchableOpacity
+            style={styles.addCartBtn}
+            onPress={() => addCartHandle(item)}>
             <Image source={images.PLUS_ICON} tintColor={colors.secondColor} />
           </TouchableOpacity>
         </View>
@@ -101,7 +104,9 @@ const CategoryWiseItem = () => {
 
   const newRenderItem = ({item}: any) => {
     return (
-      <Pressable style={styles.secondContainer} onPress={() => navigation.navigate('ProductDetail', {product: item})}>
+      <Pressable
+        style={styles.secondContainer}
+        onPress={() => navigation.navigate('ProductDetail', {product: item})}>
         <View style={styles.txtContainer}>
           <Typography
             title={'Best Seller'}
@@ -115,7 +120,7 @@ const CategoryWiseItem = () => {
             textStyle={styles.productName}
           />
           <Typography
-            title={item.price}
+            title={`$ ${item.price}`}
             size={16}
             textStyle={{fontFamily: fonts.medium}}
           />
@@ -137,9 +142,9 @@ const CategoryWiseItem = () => {
         ItemSeparatorComponent={() => (
           <View style={{marginVertical: 10}}></View>
         )}
-        ListEmptyComponent={()=>(
+        ListEmptyComponent={() => (
           <View style={styles.emptyView}>
-            <Image source={images.EMPTY_LOGO}/>
+            <Image source={images.EMPTY_LOGO} />
           </View>
         )}
       />
@@ -166,9 +171,9 @@ const CategoryWiseItem = () => {
           ItemSeparatorComponent={() => (
             <View style={{marginHorizontal: 10}}></View>
           )}
-          ListEmptyComponent={()=>(
+          ListEmptyComponent={() => (
             <View style={styles.emptyView}>
-              <Image source={images.EMPTY_LOGO}/>
+              <Image source={images.EMPTY_LOGO} />
             </View>
           )}
         />
@@ -176,7 +181,5 @@ const CategoryWiseItem = () => {
     </View>
   );
 };
-
-
 
 export default CategoryWiseItem;

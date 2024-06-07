@@ -1,15 +1,18 @@
-import {View, Text, Pressable, Image, StyleSheet, Alert} from 'react-native';
+import auth from '@react-native-firebase/auth';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import React, {useState} from 'react';
+import {Alert, Image, Pressable, View} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import Button from '../../../component/common/Button';
+import Inputs from '../../../component/common/Input';
 import Typography from '../../../component/common/Typography';
 import {colors} from '../../../constants/colors';
-import Inputs from '../../../component/common/Input';
-import Button from '../../../component/common/Button';
+import {fonts} from '../../../constants/fonts';
 import {images} from '../../../constants/icons';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin,statusCodes} from '@react-native-google-signin/google-signin';
-import { fonts } from '../../../constants/fonts';
-import { styles } from './styles';
+import {styles} from './styles';
 
 GoogleSignin.configure({
   webClientId:
@@ -75,7 +78,11 @@ const Registration = ({navigation}: any) => {
           <Image source={images.BACK_ARROW} />
         </Pressable>
         <View style={styles.loginContent}>
-          <Typography title={'Create Account'} size={28} textStyle={{fontFamily:fonts.bold}}/>
+          <Typography
+            title={'Create Account'}
+            size={28}
+            textStyle={{fontFamily: fonts.bold}}
+          />
           <Typography
             title={'Let’s Create Account Together'}
             size={16}
@@ -121,7 +128,11 @@ const Registration = ({navigation}: any) => {
             <Button title={'Sign Up'} onPress={register} />
             <Pressable style={styles.googleBtn} onPress={googleSignIn}>
               <Image source={images.GOOGLE_ICON} style={styles.googleIcon} />
-              <Typography title={'Sign in with google'} size={18} textStyle={{fontFamily:fonts.medium}} />
+              <Typography
+                title={'Sign in with google'}
+                size={18}
+                textStyle={{fontFamily: fonts.medium}}
+              />
             </Pressable>
           </View>
           <View style={styles.registrationContainer}>
@@ -129,10 +140,14 @@ const Registration = ({navigation}: any) => {
               title={'Already have an account?'}
               size={12}
               color={colors.peraTextColor}
-              textStyle={{fontFamily:fonts.regular}}
+              textStyle={{fontFamily: fonts.regular}}
             />
             <Pressable onPress={() => navigation.navigate('Login')}>
-              <Typography title={'Sign in'} size={12} textStyle={{fontFamily:fonts.regular}} />
+              <Typography
+                title={'Sign in'}
+                size={12}
+                textStyle={{fontFamily: fonts.regular}}
+              />
             </Pressable>
           </View>
         </View>
@@ -140,7 +155,5 @@ const Registration = ({navigation}: any) => {
     </KeyboardAwareScrollView>
   );
 };
-
-
 
 export default Registration;

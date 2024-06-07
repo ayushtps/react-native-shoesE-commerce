@@ -1,9 +1,9 @@
-import {View, Text, Pressable, Image, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {images} from '../../../constants/icons';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
-import {useNavigation} from '@react-navigation/native';
+import {images} from '../../../constants/icons';
 
 interface headerProps {
   title?: string;
@@ -36,7 +36,7 @@ const Header = (props: headerProps) => {
             <Image source={image} />
           </Pressable>
         ) : (
-          <View></View>
+          <View style={{padding: 10, height: 44, width: 44}}></View>
         )}
       </View>
     </View>

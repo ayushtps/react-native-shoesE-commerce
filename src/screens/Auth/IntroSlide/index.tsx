@@ -1,12 +1,12 @@
-import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
-import { Image, Pressable, View } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import React, {useState} from 'react';
+import {Image, Pressable, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Typography from '../../../component/common/Typography';
-import { colors } from '../../../constants/colors';
-import { introSlides } from '../../../constants/data';
-import { images } from '../../../constants/icons';
-import { styles } from './styles';
+import {colors} from '../../../constants/colors';
+import {introSlides} from '../../../constants/data';
+import {images} from '../../../constants/icons';
+import {styles} from './styles';
 
 interface SlideItem {
   title: string;
@@ -60,7 +60,9 @@ const Intro = ({navigation}: introProps) => {
 
   const renderDoneButton = () => {
     return (
-      <Pressable style={styles.buttonCircle} onPress={()=>navigation.navigate('Login')}>
+      <Pressable
+        style={styles.buttonCircle}
+        onPress={() => navigation.navigate('Login')}>
         <Image source={images.CHECK_ARROW} />
       </Pressable>
     );
@@ -105,7 +107,5 @@ const Intro = ({navigation}: introProps) => {
     </View>
   );
 };
-
-
 
 export default Intro;
