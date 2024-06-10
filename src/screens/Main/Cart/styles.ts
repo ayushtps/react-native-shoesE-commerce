@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
   emptyView: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop:150
   },
   extra: {
     paddingBottom: 10,

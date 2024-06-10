@@ -8,19 +8,24 @@ import {images} from '../../../constants/icons';
 interface headerProps {
   title?: string;
   image?: any;
+  back?: boolean;
 }
 
 const Header = (props: headerProps) => {
-  const {title, image} = props;
+  const {title, image, back} = props;
   const navigation = useNavigation();
   return (
     <View>
       <View style={styles.headerContainer}>
-        <Pressable
-          style={styles.headerBack}
-          onPress={() => navigation.goBack()}>
-          <Image source={images.BACK_ARROW} />
-        </Pressable>
+        {back === false ? (
+          <View style={{padding: 10, height: 44, width: 44}}></View>
+        ) : (
+          <Pressable
+            style={styles.headerBack}
+            onPress={() => navigation.goBack()}>
+            <Image source={images.BACK_ARROW} />
+          </Pressable>
+        )}
         <Text
           style={{
             fontFamily: fonts.medium,

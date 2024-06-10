@@ -56,7 +56,7 @@ const WishList = () => {
   return (
     <View style={styles.wishListContainer}>
       <View style={{marginBottom: 20}}>
-        <Header title={'Favourite'} image={images.WISHLIST_ICON} />
+        <Header title={'Favourite'} image={images.WISHLIST_ICON} back={false} />
       </View>
       <View>
         <FlatList

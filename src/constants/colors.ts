@@ -6,5 +6,6 @@ export const colors={
     buttonColor:'#5B9EE1',
     dotColor:'#E5EEF7',
     circleColor:'#A4CDF6',
-    mainCircle:'#C0E0FF'
+    mainCircle:'#C0E0FF',
+    fillColor:'#E9EDEF'
 }

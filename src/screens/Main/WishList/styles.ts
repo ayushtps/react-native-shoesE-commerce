@@ -4,13 +4,11 @@ import { fonts } from "../../../constants/fonts";
 
 export const styles = StyleSheet.create({
     wishListContainer: {
-      // flex: 1,
       backgroundColor: colors.primaryColor,
       padding: 20,
       height:'81%'
     },
     itemContainer: {
-      // flex: 1,
       marginHorizontal: 10,
       backgroundColor: colors.secondColor,
       borderRadius: 16,
@@ -19,7 +17,8 @@ export const styles = StyleSheet.create({
     },
     emptyView:{
       justifyContent:'center',
-      alignItems:'center'
+      alignItems:'center',
+      marginTop:150
     },
     imgContainer: {
       justifyContent: 'center',

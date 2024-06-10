@@ -128,49 +128,51 @@ const CartList = () => {
           />
         </View>
       </View>
-      <View style={styles.totalContainer}>
-        <View style={[styles.totalInner, {marginBottom: 10}]}>
-          <Typography
-            size={16}
-            color={colors.peraTextColor}
-            title={'Subtotal'}
-          />
-          <Typography
-            size={18}
-            color={colors.headingTextColor}
-            title={`$ ${Price}`}
+      {Price > 0 && (
+        <View style={styles.totalContainer}>
+          <View style={[styles.totalInner, {marginBottom: 10}]}>
+            <Typography
+              size={16}
+              color={colors.peraTextColor}
+              title={'Subtotal'}
+            />
+            <Typography
+              size={18}
+              color={colors.headingTextColor}
+              title={`$ ${Price}`}
+            />
+          </View>
+          <View style={[styles.totalInner, styles.extra]}>
+            <Typography
+              size={16}
+              color={colors.peraTextColor}
+              title={'Shipping'}
+            />
+            <Typography
+              size={18}
+              color={colors.headingTextColor}
+              title={Price ? '$40.90' : 0}
+            />
+          </View>
+          <View style={styles.totalInner}>
+            <Typography
+              size={16}
+              color={colors.headingTextColor}
+              title={'Total Cost'}
+            />
+            <Typography
+              size={18}
+              color={colors.headingTextColor}
+              title={Price ? `$ ${Price + 40}` : 0}
+            />
+          </View>
+          <Button
+            title={'Checkout'}
+            style={{marginTop: 10}}
+            onPress={handleBtn}
           />
         </View>
-        <View style={[styles.totalInner, styles.extra]}>
-          <Typography
-            size={16}
-            color={colors.peraTextColor}
-            title={'Shipping'}
-          />
-          <Typography
-            size={18}
-            color={colors.headingTextColor}
-            title={Price ? '$40.90' : 0}
-          />
-        </View>
-        <View style={styles.totalInner}>
-          <Typography
-            size={16}
-            color={colors.headingTextColor}
-            title={'Total Cost'}
-          />
-          <Typography
-            size={18}
-            color={colors.headingTextColor}
-            title={Price ? `$ ${Price + 40}` : 0}
-          />
-        </View>
-        <Button
-          title={'Checkout'}
-          style={{marginTop: 10}}
-          onPress={handleBtn}
-        />
-      </View>
+      )}
     </View>
   );
 };

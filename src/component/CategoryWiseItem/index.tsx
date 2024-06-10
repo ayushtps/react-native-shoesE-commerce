@@ -1,8 +1,8 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {FlatList, Image, Pressable, TouchableOpacity, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {colors} from '../../constants/colors';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Image, Pressable, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { colors } from '../../constants/colors';
 import {
   adidasNewShoesList,
   adidasPopularShoesList,
@@ -15,21 +15,22 @@ import {
   underNewShoesList,
   underPopularShoesList,
 } from '../../constants/data';
-import {fonts} from '../../constants/fonts';
-import {images} from '../../constants/icons';
-import {addCart} from '../../redux/slice/CartSlice';
-import {addWish} from '../../redux/slice/WishListSlice';
-import {RootState} from '../../redux/store/store';
+import { fonts } from '../../constants/fonts';
+import { images } from '../../constants/icons';
+import { addCart } from '../../redux/slice/CartSlice';
+import { addWish } from '../../redux/slice/WishListSlice';
+import { RootState } from '../../redux/store/store';
 import Typography from '../common/Typography';
-import {styles} from './styles';
+import { styles } from './styles';
 
 const CategoryWiseItem = () => {
   const navigation = useNavigation();
-  const {data} = useSelector((state: RootState) => state.category);
+  const { data } = useSelector((state: RootState) => state.category);
   const dispatch = useDispatch();
 
   const [renderItem1, setRenderItem1] = useState(nikePopularShoesList);
   const [renderItem2, setRenderItem2] = useState(nikeNewShoesList);
+  const [pressedItems, setPressedItems] = useState({});
 
   useEffect(() => {
     if (data) {
@@ -52,24 +53,44 @@ const CategoryWiseItem = () => {
     }
   }, [data]);
 
-  const addCartHandle = (item: any) => {
+  const addCartHandle = (item) => {
     dispatch(addCart(item));
   };
 
-  const addWishhandle = (item: any) => {
+  const addWishHandle = (item) => {
     dispatch(addWish(item));
   };
 
-  const renderItem = ({item}: any) => {
+  const handlePressIn = (item) => {
+    setPressedItems(prevState => ({
+      ...prevState,
+      [item.id]: true
+    }));
+  };
+
+  const handlePressOut = (item) => {
+    setPressedItems(prevState => ({
+      ...prevState,
+      [item.id]: false
+    }));
+  };
+
+  const renderItem = ({ item }) => {
+    const isPressed = pressedItems[item.id];
     return (
       <Pressable
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('ProductDetail', {product: item})}>
+        onPress={() => navigation.navigate('ProductDetail', { product: item })}>
         <View style={styles.imgContainer}>
           <Pressable
             style={styles.wishListContainer}
-            onPress={() => addWishhandle(item)}>
-            <Image source={images.MINIHEART_ICON} />
+            onPressIn={() => handlePressIn(item)}
+            onPressOut={() => handlePressOut(item)}
+            onPress={() => addWishHandle(item)}>
+            <Image 
+              source={images.MINIHEART_ICON} 
+              style={{ tintColor: isPressed ? 'red' : 'black' }} 
+            />
           </Pressable>
           <Image source={item.image} />
         </View>
@@ -78,7 +99,7 @@ const CategoryWiseItem = () => {
             title={'Best Seller'}
             size={12}
             color={colors.buttonColor}
-            textStyle={{fontFamily: fonts.regular}}
+            textStyle={{ fontFamily: fonts.regular }}
           />
           <Typography
             title={item.name}
@@ -102,17 +123,17 @@ const CategoryWiseItem = () => {
     );
   };
 
-  const newRenderItem = ({item}: any) => {
+  const newRenderItem = ({ item }) => {
     return (
       <Pressable
         style={styles.secondContainer}
-        onPress={() => navigation.navigate('ProductDetail', {product: item})}>
+        onPress={() => navigation.navigate('ProductDetail', { product: item })}>
         <View style={styles.txtContainer}>
           <Typography
             title={'Best Seller'}
             size={12}
             color={colors.buttonColor}
-            textStyle={{fontFamily: fonts.regular}}
+            textStyle={{ fontFamily: fonts.regular }}
           />
           <Typography
             title={item.name}
@@ -122,7 +143,7 @@ const CategoryWiseItem = () => {
           <Typography
             title={`$ ${item.price}`}
             size={16}
-            textStyle={{fontFamily: fonts.medium}}
+            textStyle={{ fontFamily: fonts.medium }}
           />
         </View>
         <View style={styles.imgContainer}>
@@ -140,7 +161,7 @@ const CategoryWiseItem = () => {
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => (
-          <View style={{marginVertical: 10}}></View>
+          <View style={{ marginVertical: 10 }}></View>
         )}
         ListEmptyComponent={() => (
           <View style={styles.emptyView}>
@@ -154,13 +175,13 @@ const CategoryWiseItem = () => {
           <Typography
             title={'New Arrivals'}
             size={16}
-            textStyle={{fontFamily: fonts.medium}}
+            textStyle={{ fontFamily: fonts.medium }}
           />
           <Typography
             title={'See all'}
             size={13}
             color={colors.buttonColor}
-            textStyle={{fontFamily: fonts.medium}}
+            textStyle={{ fontFamily: fonts.medium }}
           />
         </View>
         <FlatList
@@ -169,7 +190,7 @@ const CategoryWiseItem = () => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => (
-            <View style={{marginHorizontal: 10}}></View>
+            <View style={{ marginHorizontal: 10 }}></View>
           )}
           ListEmptyComponent={() => (
             <View style={styles.emptyView}>

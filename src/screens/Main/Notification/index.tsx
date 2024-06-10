@@ -51,7 +51,7 @@ const Notification = () => {
   return (
     <View style={styles.notificationContainer}>
       <View>
-        <Header title={'Notification'} />
+        <Header title={'Notification'} back={false} />
       </View>
       <View style={styles.con1}>
         <Typography title={'Today'} size={18} textStyle={styles.txt} />

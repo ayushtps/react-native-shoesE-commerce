@@ -47,4 +47,5 @@ export const images={
     DOWN_ICON:require('../assets/icons/down.png'),
     EDIT_ICON:require('../assets/icons/edit.png'),
     EMAIL_ICON:require('../assets/icons/email.png'),
+    FILTER:require('../assets/icons/Filter.png'),
 }

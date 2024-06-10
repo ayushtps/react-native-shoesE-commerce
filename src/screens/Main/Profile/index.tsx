@@ -25,7 +25,7 @@ const Profile = () => {
 
   return (
     <KeyboardAwareScrollView style={styles.profileContainer}>
-      <Header title={'Profile'} image={images.EDIT_ICON} />
+      <Header title={'Profile'} image={images.EDIT_ICON} back={false} />
       <View style={styles.imgContainer}>
         <Image source={images.PROFILE} />
         <Typography title={'Alisson becker'} size={20} />
