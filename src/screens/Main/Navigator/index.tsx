@@ -1,38 +1,27 @@
+import auth from '@react-native-firebase/auth';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
+  createDrawerNavigator,
+} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
-import {Button, Image, View} from 'react-native';
-import {colors} from '../../../constants/colors';
-import {mainStack, mainTabNav} from '../../../constants/navigations';
-import WishList from '../WishList';
-import Home from '../Home';
+import React, {useContext, useEffect} from 'react';
+import {Alert, Image, View} from 'react-native';
+import Typography from '../../../component/common/Typography';
+import {fonts} from '../../../constants/fonts';
+import {images} from '../../../constants/icons';
+import {drawerNav, mainStack, mainTabNav} from '../../../constants/navigations';
+import {Switch} from 'react-native-paper';
+import {AuthenticatedUserContext} from '../../../../App';
 
 const Drawer = createDrawerNavigator();
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
 export const MainTab = () => {
+  const {theme} = useContext(AuthenticatedUserContext);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -53,7 +42,7 @@ export const MainTab = () => {
                 left: 16,
                 right: 16,
                 height: 60,
-                backgroundColor: colors.secondColor,
+                backgroundColor: theme.secondColor,
                 borderRadius: 16,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -69,10 +58,10 @@ export const MainTab = () => {
                           width: 70,
                           borderRadius: 999,
                           elevation: 1,
-                          backgroundColor: colors.buttonColor,
+                          backgroundColor: theme.buttonColor,
                           marginBottom: 56,
                           borderWidth: 10,
-                          borderColor: colors.primaryColor,
+                          borderColor: theme.primaryColor,
                         }
                       : {alignItems: 'center'}
                   }>
@@ -81,8 +70,8 @@ export const MainTab = () => {
                     resizeMode="cover"
                     style={{
                       tintColor: focused
-                        ? colors.primaryColor
-                        : colors.peraTextColor,
+                        ? theme.whiteColor
+                        : theme.peraTextColor,
                     }}
                   />
                 </View>
@@ -92,14 +81,121 @@ export const MainTab = () => {
         );
       })}
     </Tab.Navigator>
+  );  
+};
+
+const handleLogOut = () => {
+  auth()
+    .signOut()
+    .then(() => Alert.alert('User signed out!'));
+};
+
+const CustomDrawerContent = props => {
+  const {setIsSwitchOn, isSwitchOn,theme} = useContext(AuthenticatedUserContext);
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+  
+
+  return (
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={{flex: 1, justifyContent: 'space-around'}}>
+      <View style={{marginLeft: 20}}>
+        <View>
+          <Image source={images.PROFILE1} />
+          <Image
+            source={images.WELCOME_ICON}
+            style={{marginTop: 24, marginBottom: 6}}
+          />
+          <Typography
+            title={'Alisson becker'}
+            size={24}
+            color={theme.secondColor}
+          />
+        </View>
+      </View>
+      <View
+        style={{
+          borderBottomWidth: 1,
+          paddingBottom: 10,
+          borderBottomColor: theme.peraTextColor,
+        }}>
+        <DrawerItemList {...props} />
+      </View>
+      <View style={{marginBottom: 20}}>
+        <DrawerItem
+          label="Dark Mode"
+          labelStyle={{
+            color: theme.secondColor,
+            fontFamily: fonts.medium,
+            fontSize: 16,
+          }}
+          onPress={handleLogOut}
+          icon={({size}) => (
+            <Switch
+              value={isSwitchOn}
+              onValueChange={onToggleSwitch}
+              color={theme.peraTextColor}
+              style={{marginRight: -20, marginLeft: -5}}
+            />
+          )}
+        />
+        <DrawerItem
+          label="Sign Out"
+          labelStyle={{
+            color: theme.secondColor,
+            fontFamily: fonts.medium,
+            fontSize: 16,
+          }}
+          onPress={handleLogOut}
+          icon={({size}) => (
+            <Image
+              source={images.SIGN_OUT}
+              style={{height: size, width: size}}
+              tintColor={theme.peraTextColor}
+            />
+          )}
+        />
+      </View>
+    </DrawerContentScrollView>
   );
 };
 
 export const AppDrawer = () => {
+  const {theme} = useContext(AuthenticatedUserContext);
   return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home1" component={MainStack} />
-      <Drawer.Screen name="Home2" component={Home} />
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawerContent {...props} />}>
+      {drawerNav.map((item, index) => {
+        return (
+          <Drawer.Screen
+            name={item.title}
+            component={item.component}
+            options={{
+              headerShown: false,
+              drawerStyle: {
+                backgroundColor: theme.headingTextColor,
+                width: 260,
+                borderTopRightRadius: 20,
+                borderBottomRightRadius: 20,
+              },
+              drawerLabelStyle: {
+                color: theme.secondColor,
+                fontFamily: fonts.medium,
+                fontSize: 16,
+              },
+              drawerIcon: ({focused, size}) => (
+                <Image
+                  source={item.src}
+                  style={{height: size, width: size}}
+                  tintColor={theme.peraTextColor}
+                />
+              ),
+            }}
+            key={index}
+          />
+        );
+      })}
     </Drawer.Navigator>
   );
 };

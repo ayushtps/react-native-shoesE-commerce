@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
 import {images} from '../../../constants/icons';
+import { AuthenticatedUserContext } from '../../../../App';
 
 interface headerProps {
   title?: string;
@@ -12,6 +12,9 @@ interface headerProps {
 }
 
 const Header = (props: headerProps) => {
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
   const {title, image, back} = props;
   const navigation = useNavigation();
   return (
@@ -23,13 +26,13 @@ const Header = (props: headerProps) => {
           <Pressable
             style={styles.headerBack}
             onPress={() => navigation.goBack()}>
-            <Image source={images.BACK_ARROW} />
+            <Image source={images.BACK_ARROW} tintColor={theme.tintColor} />
           </Pressable>
         )}
         <Text
           style={{
             fontFamily: fonts.medium,
-            color: colors.headingTextColor,
+            color: theme.headingTextColor,
             fontSize: 16,
           }}>
           {title}
@@ -38,7 +41,7 @@ const Header = (props: headerProps) => {
           <Pressable
             style={styles.headerBack}
             onPress={() => navigation.goBack()}>
-            <Image source={image} />
+            <Image source={image} tintColor={theme.tintColor} />
           </Pressable>
         ) : (
           <View style={{padding: 10, height: 44, width: 44}}></View>
@@ -48,14 +51,14 @@ const Header = (props: headerProps) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styling=(theme) => StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   headerBack: {
-    backgroundColor: colors.secondColor,
+    backgroundColor: theme.secondColor,
     padding: 10,
     height: 44,
     width: 44,

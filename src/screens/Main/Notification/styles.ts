@@ -1,11 +1,10 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/colors";
 import { fonts } from "../../../constants/fonts";
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
     notificationContainer: {
       flex: 1,
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
       padding: 20,
     },
     notificationFlat: {
@@ -17,7 +16,7 @@ export const styles = StyleSheet.create({
     notiImage: {
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       height: 85,
       width: 87,
       borderRadius: 20,
@@ -39,7 +38,7 @@ export const styles = StyleSheet.create({
     dot: {
       height: 12,
       width: 12,
-      backgroundColor: colors.buttonColor,
+      backgroundColor: theme.buttonColor,
       borderRadius: 40,
       // marginTop:10
     },

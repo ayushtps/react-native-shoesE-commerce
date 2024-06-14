@@ -1,41 +1,23 @@
-import React, {useState} from 'react';
-import {FlatList, Image, Pressable, View} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch, useSelector} from 'react-redux';
+import { DrawerActions } from '@react-navigation/native';
+import React, { useContext, useState } from 'react';
+import { FlatList, Image, Pressable, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthenticatedUserContext } from '../../../../App';
 import CategoryWiseItem from '../../../component/CategoryWiseItem';
 import Typography from '../../../component/common/Typography';
-import {colors} from '../../../constants/colors';
-import {categoryList} from '../../../constants/data';
-import {fonts} from '../../../constants/fonts';
-import {images} from '../../../constants/icons';
-import {categorySelect} from '../../../redux/slice/CategorySlice';
-import {RootState} from '../../../redux/store/store';
+import { categoryList } from '../../../constants/data';
+import { fonts } from '../../../constants/fonts';
+import { images } from '../../../constants/icons';
+import { categorySelect } from '../../../redux/slice/CategorySlice';
+import { RootState } from '../../../redux/store/store';
 import Search from './Search';
-import {styles} from './styles';
-import { DrawerActions } from '@react-navigation/native';
-
-const renderItem = ({item, isSelected, onPress}: any) => {
-  return (
-    <Pressable
-      style={[styles.itemContainer, isSelected && styles.selectedItemContainer]}
-      onPress={onPress}>
-      <View style={styles.headerBack}>
-        <Image source={item.image} />
-      </View>
-      {isSelected && (
-        <Typography
-          title={item.name}
-          size={14}
-          color={colors.secondColor}
-          textStyle={styles.itemText}
-        />
-      )}
-    </Pressable>
-  );
-};
+import { styling } from './styles';
 
 const Home = ({navigation}: any) => {
   const [selectedItemId, setSelectedItemId] = useState(1);
+  const {theme} = useContext(AuthenticatedUserContext);
+  const styles = styling(theme);
   const dispatch = useDispatch();
   const {data} = useSelector((state: RootState) => state.addCart);
 
@@ -44,19 +26,39 @@ const Home = ({navigation}: any) => {
     dispatch(categorySelect(item));
   };
 
+  const renderItem = ({item, isSelected, onPress}: any) => {
+    return (
+      <Pressable
+        style={[styles.itemContainer, isSelected && styles.selectedItemContainer]}
+        onPress={onPress}>
+        <View style={styles.headerBack}>
+          <Image source={item.image} tintColor={theme.tintColor} />
+        </View>
+        {isSelected && (
+          <Typography
+            title={item.name}
+            size={14}
+            color={theme.secondColor}
+            textStyle={styles.itemText}
+          />
+        )}
+      </Pressable>
+    );
+  };
+
   return (
     <KeyboardAwareScrollView style={styles.homeContainer}>
       <View style={styles.headerContainer}>
         <Pressable
           style={styles.headerBack}
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-          <Image source={images.DRAWER_ICON} />
+          <Image source={images.DRAWER_ICON} tintColor={theme.tintColor} />
         </Pressable>
         <View style={styles.middlePoint}>
           <Typography
             title={'Store location'}
             size={12}
-            color={colors.peraTextColor}
+            color={theme.headingTextColor}
             textStyle={{fontFamily: fonts.regular}}
           />
           <View style={styles.location}>
@@ -75,13 +77,13 @@ const Home = ({navigation}: any) => {
             <View style={styles.cartCircle}>
               <Typography
                 title={data.length}
-                color={colors.secondColor}
+                color={theme.secondColor}
                 size={10}
                 textStyle={{fontFamily: fonts.bold}}
               />
             </View>
           )}
-          <Image source={images.HEADER_CART_ICON} />
+          <Image source={images.HEADER_CART_ICON} tintColor={theme.tintColor} />
         </Pressable>
       </View>
       <Search />
@@ -116,7 +118,7 @@ const Home = ({navigation}: any) => {
         <Typography
           title={'See all'}
           size={13}
-          color={colors.buttonColor}
+          color={theme.buttonColor}
           textStyle={{fontFamily: fonts.medium}}
         />
       </View>

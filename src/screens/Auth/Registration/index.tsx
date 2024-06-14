@@ -3,16 +3,17 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import React, {useState} from 'react';
-import {Alert, Image, Pressable, View} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import React, { useContext, useState } from 'react';
+import { Alert, Image, Pressable, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { AuthenticatedUserContext } from '../../../../App';
 import Button from '../../../component/common/Button';
 import Inputs from '../../../component/common/Input';
 import Typography from '../../../component/common/Typography';
-import {colors} from '../../../constants/colors';
-import {fonts} from '../../../constants/fonts';
-import {images} from '../../../constants/icons';
-import {styles} from './styles';
+import { fonts } from '../../../constants/fonts';
+import { images } from '../../../constants/icons';
+import { setIntroShown } from '../../../utility/Utility';
+import { styling } from './styles';
 
 GoogleSignin.configure({
   webClientId:
@@ -20,6 +21,8 @@ GoogleSignin.configure({
 });
 
 const Registration = ({navigation}: any) => {
+  const {theme} = useContext(AuthenticatedUserContext);
+  const styles = styling(theme);
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -29,6 +32,7 @@ const Registration = ({navigation}: any) => {
       .createUserWithEmailAndPassword(userEmail, userPassword)
       .then(() => {
         Alert.alert('Register Successfully');
+        setIntroShown();
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -86,7 +90,7 @@ const Registration = ({navigation}: any) => {
           <Typography
             title={'Let’s Create Account Together'}
             size={16}
-            color={colors.peraTextColor}
+            color={theme.peraTextColor}
             textStyle={styles.textPera}
           />
         </View>
@@ -139,7 +143,7 @@ const Registration = ({navigation}: any) => {
             <Typography
               title={'Already have an account?'}
               size={12}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={{fontFamily: fonts.regular}}
             />
             <Pressable onPress={() => navigation.navigate('Login')}>

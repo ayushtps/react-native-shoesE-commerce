@@ -1,17 +1,17 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/colors";
-import { fonts } from "../../../constants/fonts";
+import {StyleSheet} from 'react-native';
+import {fonts} from '../../../constants/fonts';
 
-export const styles = StyleSheet.create({
+export const styling = theme =>
+  StyleSheet.create({
     loginContainer: {
       flex: 1,
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
     },
     loginInner: {
       padding: 20,
     },
     headerBack: {
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       padding: 10,
       height: 44,
       width: 44,
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
       fontFamily: fonts.regular,
     },
     googleBtn: {
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       flexDirection: 'row',
       borderRadius: 50,
       paddingVertical: 16,

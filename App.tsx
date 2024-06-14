@@ -1,36 +1,56 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
-import { Button, View } from 'react-native';
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import {StatusBar, StyleSheet, View} from 'react-native';
+import {PaperProvider} from 'react-native-paper';
+import {Provider} from 'react-redux';
+import SplashScreen from './src/component/SplashScreen';
+import {colors, darkTheme, lightTheme} from './src/constants/colors';
+import store from './src/redux/store/store';
+import RootNavigation from './src/rootnavigations';
+import {setIntroShown} from './src/utility/Utility';
+import {StripeProvider} from '@stripe/stripe-react-native';
 
-function HomeScreen({ navigation }) {
+export const AuthenticatedUserContext = createContext({});
+
+const STRIPE_KEY =
+  'pk_test_51Ou7RESEzEDavEglAnSPMMgebXlR1dhmizoH8sEF5C6VamQx0fC1W8QqPHilXRj1UXAPISdHDySmZXngRFzz04PI00hmtVq41J';
+
+const AuthenticatedProvider = ({children}: any) => {
+  const [user, setUser] = useState(null);
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+  const theme = isSwitchOn ? darkTheme : lightTheme;
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
+    <AuthenticatedUserContext.Provider
+      value={{user, setUser, isSwitchOn, setIsSwitchOn, theme}}>
+      {children}
+    </AuthenticatedUserContext.Provider>
   );
-}
+};
+const App = () => {
+  const [splash, setSplash] = useState(true);
+  setTimeout(() => {
+    setSplash(false);
+  }, 2000);
 
-function NotificationsScreen({ navigation }) {
+  useEffect(() => {
+    setIntroShown();
+  }, []);
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
+    <Provider store={store}>
+      <StripeProvider publishableKey={STRIPE_KEY}>
+        <PaperProvider>
+          <AuthenticatedProvider>
+            <View style={{flex: 1}}>
+              <StatusBar backgroundColor={colors.headingTextColor} />
+              {splash ? <SplashScreen /> : <RootNavigation />}
+            </View>
+          </AuthenticatedProvider>
+        </PaperProvider>
+      </StripeProvider>
+    </Provider>
   );
-}
+};
 
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
+export default App;

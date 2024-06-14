@@ -1,31 +1,33 @@
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   FlatList,
   Image,
   Pressable,
-  ScrollView,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { Modal, Portal } from 'react-native-paper';
-import { colors } from '../../constants/colors';
+import { useDispatch } from 'react-redux';
 import { allProductList } from '../../constants/data';
 import { fonts } from '../../constants/fonts';
 import { images } from '../../constants/icons';
 import { addCart } from '../../redux/slice/CartSlice';
 import { addWish } from '../../redux/slice/WishListSlice';
+import Button from '../common/Button';
 import Typography from '../common/Typography';
 import Header from '../layout/Header';
-import { styles } from './styles';
-import Button from '../common/Button';
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { AuthenticatedUserContext } from '../../../App';
+import { styling } from './styles';
 
 const SearchScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState(allProductList);
   const [visible, setVisible] = useState(false);
@@ -61,7 +63,6 @@ const SearchScreen = () => {
 
   const filterProducts = (query, priceRange) => {
     let filtered = allProductList;
-    console.log("priceRange",priceRange[0]);
     
     if (query.trim() !== '') {
       filtered = filtered.filter(product =>
@@ -100,7 +101,7 @@ const SearchScreen = () => {
           <Typography
             title={'Best Seller'}
             size={12}
-            color={colors.buttonColor}
+            color={theme.buttonColor}
             textStyle={{ fontFamily: fonts.regular }}
           />
           <Typography
@@ -115,7 +116,7 @@ const SearchScreen = () => {
             style={styles.addCartBtn}
             onPress={() => addCartHandle(item)}
           >
-            <Image source={images.PLUS_ICON} tintColor={colors.secondColor} />
+            <Image source={images.PLUS_ICON} tintColor={theme.secondColor} />
           </TouchableOpacity>
         </View>
       </Pressable>
@@ -132,7 +133,7 @@ const SearchScreen = () => {
         <TextInput
           style={styles.field}
           placeholder="Looking for shoes"
-          placeholderTextColor={colors.peraTextColor}
+          placeholderTextColor={theme.peraTextColor}
           value={searchQuery}
           onChangeText={handleSearch}
         />
@@ -154,7 +155,7 @@ const SearchScreen = () => {
             <Image source={images.EMPTY_LOGO} />
             <Typography
               title={'No Item Found'}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               size={16}
             />
           </View>
@@ -183,11 +184,11 @@ const SearchScreen = () => {
                   max={1000}
                   step={1}
                   selectedStyle={{
-                    backgroundColor: colors.buttonColor,
+                    backgroundColor: theme.buttonColor,
                     height: 6,
                   }}
                   unselectedStyle={{
-                    backgroundColor: colors.fillColor,
+                    backgroundColor: theme.fillColor,
                     height: 6,
                   }}
                   markerContainerStyle={{
@@ -195,7 +196,7 @@ const SearchScreen = () => {
                     alignItems: 'center',
                   }}
                   markerStyle={{
-                    backgroundColor: colors.buttonColor,
+                    backgroundColor: theme.buttonColor,
                     height: 15,
                     marginTop: 4,
                   }}

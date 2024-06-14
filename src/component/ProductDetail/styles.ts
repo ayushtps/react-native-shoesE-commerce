@@ -1,11 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
 import {fonts} from '../../constants/fonts';
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
   productDetails: {
     flex: 1,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: theme.primaryColor,
   },
   productHeader: {
     paddingHorizontal: 20,
@@ -19,7 +18,7 @@ export const styles = StyleSheet.create({
   detailsContainer: {
     flex: 1,
     height: '100%',
-    backgroundColor: colors.secondColor,
+    backgroundColor: theme.secondColor,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },
@@ -63,7 +62,7 @@ export const styles = StyleSheet.create({
     height: 45,
     width: 45,
     borderRadius: 40,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: theme.primaryColor,
     justifyContent: 'center',
     alignItems: 'center',
   },

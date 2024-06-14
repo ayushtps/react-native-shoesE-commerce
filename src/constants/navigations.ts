@@ -6,12 +6,12 @@ import Login from '../screens/Auth/Login';
 import Registration from '../screens/Auth/Registration';
 import CartList from '../screens/Main/Cart';
 import Home from '../screens/Main/Home';
-import MainStack, { AppDrawer, MainTab } from '../screens/Main/Navigator';
+import MainStack, {AppDrawer, MainTab} from '../screens/Main/Navigator';
 import Notification from '../screens/Main/Notification';
 import Profile from '../screens/Main/Profile';
 import WishList from '../screens/Main/WishList';
-import { images } from './icons';
-import { SCREENS } from './routes';
+import {images} from './icons';
+import {SCREENS} from './routes';
 
 export const authStackNav = [
   {
@@ -39,8 +39,8 @@ export const authStackNav = [
 export const mainStack = [
   {
     id: 1,
-    name: SCREENS.MAiNTAB,
-    component: MainTab,
+    name: SCREENS.DRAWERNAV,
+    component: AppDrawer,
   },
   {
     id: 2,
@@ -62,11 +62,6 @@ export const mainStack = [
     name: SCREENS.PAYMENT,
     component: Payment,
   },
-  {
-    id: 6,
-    name: 'App',
-    component: AppDrawer,
-  },
 ];
 
 export const mainTabNav = [
@@ -74,7 +69,7 @@ export const mainTabNav = [
     id: 1,
     title: SCREENS.HOME,
     component: Home,
-    src:images.HOME_ICON,
+    src: images.HOME_ICON,
   },
   {
     id: 2,
@@ -86,12 +81,27 @@ export const mainTabNav = [
     id: 3,
     title: SCREENS.NOTIFICATION,
     component: Notification,
-    src:images.NOTIFICATION_ICON,
+    src: images.NOTIFICATION_ICON,
   },
   {
     id: 4,
-    title:SCREENS.PROFILE,
+    title: SCREENS.PROFILE,
     component: Profile,
     src: images.PROFILE_ICON,
+  },
+];
+
+export const drawerNav = [
+  {
+    id: 1,
+    title: SCREENS.HOME,
+    component: MainTab,
+    src: images.HOME_ICON,
+  },
+  {
+    id: 2,
+    title: SCREENS.CARTLIST,
+    component: CartList,
+    src: images.CARTLIST_ICON,
   },
 ];

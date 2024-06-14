@@ -1,18 +1,21 @@
 import auth from '@react-native-firebase/auth';
-import React, {useState} from 'react';
-import {Alert, Image, Pressable, View} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import React, { useContext, useState } from 'react';
+import { Alert, Image, Pressable, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { AuthenticatedUserContext } from '../../../../App';
 import Button from '../../../component/common/Button';
 import Inputs from '../../../component/common/Input';
 import Typography from '../../../component/common/Typography';
-import {colors} from '../../../constants/colors';
-import {fonts} from '../../../constants/fonts';
-import {images} from '../../../constants/icons';
-import {styles} from './styles';
+import { fonts } from '../../../constants/fonts';
+import { images } from '../../../constants/icons';
+import { styling } from './styles';
 
 const Login = ({navigation}: any) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
 
   const login = async () => {
     try {
@@ -45,7 +48,7 @@ const Login = ({navigation}: any) => {
           <Typography
             title={'Welcome Back You’ve Been Missed!'}
             size={16}
-            color={colors.peraTextColor}
+            color={theme.peraTextColor}
             textStyle={styles.textPera}
           />
         </View>
@@ -75,7 +78,7 @@ const Login = ({navigation}: any) => {
             <Typography
               title={'Recovery Password'}
               size={13}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={styles.recoveryText}
             />
           </View>
@@ -94,7 +97,7 @@ const Login = ({navigation}: any) => {
             <Typography
               title={'Don’t have an account?'}
               size={12}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={{fontFamily: fonts.regular}}
             />
             <Pressable onPress={() => navigation.navigate('Register')}>

@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Image, Pressable, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { colors } from '../../constants/colors';
+import { AuthenticatedUserContext } from '../../../App';
 import {
   adidasNewShoesList,
   adidasPopularShoesList,
@@ -21,12 +21,15 @@ import { addCart } from '../../redux/slice/CartSlice';
 import { addWish } from '../../redux/slice/WishListSlice';
 import { RootState } from '../../redux/store/store';
 import Typography from '../common/Typography';
-import { styles } from './styles';
+import { styling } from './styles';
 
 const CategoryWiseItem = () => {
   const navigation = useNavigation();
   const { data } = useSelector((state: RootState) => state.category);
   const dispatch = useDispatch();
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
 
   const [renderItem1, setRenderItem1] = useState(nikePopularShoesList);
   const [renderItem2, setRenderItem2] = useState(nikeNewShoesList);
@@ -98,7 +101,7 @@ const CategoryWiseItem = () => {
           <Typography
             title={'Best Seller'}
             size={12}
-            color={colors.buttonColor}
+            color={theme.buttonColor}
             textStyle={{ fontFamily: fonts.regular }}
           />
           <Typography
@@ -116,7 +119,7 @@ const CategoryWiseItem = () => {
           <TouchableOpacity
             style={styles.addCartBtn}
             onPress={() => addCartHandle(item)}>
-            <Image source={images.PLUS_ICON} tintColor={colors.secondColor} />
+            <Image source={images.PLUS_ICON} tintColor={theme.secondColor} />
           </TouchableOpacity>
         </View>
       </Pressable>
@@ -132,7 +135,7 @@ const CategoryWiseItem = () => {
           <Typography
             title={'Best Seller'}
             size={12}
-            color={colors.buttonColor}
+            color={theme.buttonColor}
             textStyle={{ fontFamily: fonts.regular }}
           />
           <Typography
@@ -180,7 +183,7 @@ const CategoryWiseItem = () => {
           <Typography
             title={'See all'}
             size={13}
-            color={colors.buttonColor}
+            color={theme.buttonColor}
             textStyle={{ fontFamily: fonts.medium }}
           />
         </View>

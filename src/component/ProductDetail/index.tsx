@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Image, View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {colors} from '../../constants/colors';
 import {images} from '../../constants/icons';
 import {addCart} from '../../redux/slice/CartSlice';
 import Button from '../common/Button';
 import Typography from '../common/Typography';
 import Header from '../layout/Header';
-import {styles} from './styles';
+import { AuthenticatedUserContext } from '../../../App';
+import { styling } from './styles';
 
 const ProductDetail = ({route}: any) => {
   const {product} = route.params;
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme)
   const dispatch = useDispatch();
   const addCartHandle = () => {
     dispatch(addCart(product));
@@ -30,19 +33,19 @@ const ProductDetail = ({route}: any) => {
             <Typography
               title={'BEST SELLER'}
               size={14}
-              color={colors.buttonColor}
+              color={theme.buttonColor}
               textStyle={styles.bestSeller}
             />
             <Typography
               title={product.name}
               size={24}
-              color={colors.headingTextColor}
+              color={theme.headingTextColor}
               textStyle={styles.bestSellerName}
             />
             <Typography
               title={product.price}
               size={20}
-              color={colors.headingTextColor}
+              color={theme.headingTextColor}
               textStyle={styles.bestSellerName}
             />
             <Typography
@@ -50,7 +53,7 @@ const ProductDetail = ({route}: any) => {
                 'Air Jordan is an American brand of basketball shoes athletic, casual, and style clothing produced by Nike....'
               }
               size={14}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={styles.bestSeller}
             />
           </View>
@@ -86,13 +89,13 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   size={14}
                   title={'US'}
-                  color={colors.peraTextColor}
+                  color={theme.peraTextColor}
                   textStyle={styles.sizes}
                 />
                 <Typography
                   size={14}
                   title={'UK'}
-                  color={colors.peraTextColor}
+                  color={theme.peraTextColor}
                   textStyle={styles.sizes}
                 />
               </View>
@@ -102,7 +105,7 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   title={'38'}
                   size={16}
-                  color={colors.peraTextColor}
+                  color={theme.tintColor}
                   textStyle={styles.numerics}
                 />
               </View>
@@ -110,19 +113,19 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   title={'39'}
                   size={16}
-                  color={colors.peraTextColor}
+                  color={theme.tintColor}
                   textStyle={styles.numerics}
                 />
               </View>
               <View
                 style={[
                   styles.sizesNumberic,
-                  {backgroundColor: colors.buttonColor},
+                  {backgroundColor: theme.buttonColor},
                 ]}>
                 <Typography
                   title={'40'}
                   size={16}
-                  color={colors.secondColor}
+                  color={theme.secondColor}
                   textStyle={styles.numerics}
                 />
               </View>
@@ -130,7 +133,7 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   title={'41'}
                   size={16}
-                  color={colors.peraTextColor}
+                  color={theme.tintColor}
                   textStyle={styles.numerics}
                 />
               </View>
@@ -138,7 +141,7 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   title={'42'}
                   size={16}
-                  color={colors.peraTextColor}
+                  color={theme.tintColor}
                   textStyle={styles.numerics}
                 />
               </View>
@@ -146,7 +149,7 @@ const ProductDetail = ({route}: any) => {
                 <Typography
                   title={'43'}
                   size={16}
-                  color={colors.peraTextColor}
+                  color={theme.tintColor}
                   textStyle={styles.numerics}
                 />
               </View>
@@ -158,7 +161,7 @@ const ProductDetail = ({route}: any) => {
             <Typography
               title={'Price'}
               size={16}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={styles.bestSellerName}
             />
             <Typography

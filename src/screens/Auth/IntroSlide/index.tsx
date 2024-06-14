@@ -1,12 +1,12 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Image, Pressable, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Typography from '../../../component/common/Typography';
-import {colors} from '../../../constants/colors';
 import {introSlides} from '../../../constants/data';
 import {images} from '../../../constants/icons';
-import {styles} from './styles';
+import {AuthenticatedUserContext} from '../../../../App';
+import {styling} from './styles';
 
 interface SlideItem {
   title: string;
@@ -20,6 +20,9 @@ interface introProps {
 
 const Intro = ({navigation}: introProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
 
   const renderItem = ({item}: {item: SlideItem}) => {
     return (
@@ -43,13 +46,13 @@ const Intro = ({navigation}: introProps) => {
             <Typography
               title={item.title}
               size={40}
-              color={colors.headingTextColor}
+              color={theme.headingTextColor}
               textStyle={styles.title}
             />
             <Typography
               title={item.text}
               size={20}
-              color={colors.peraTextColor}
+              color={theme.peraTextColor}
               textStyle={styles.text}
             />
           </View>
@@ -89,14 +92,14 @@ const Intro = ({navigation}: introProps) => {
         showNextButton={true}
         activeDotStyle={{
           alignItems: 'flex-start',
-          backgroundColor: colors.buttonColor,
+          backgroundColor: theme.buttonColor,
           borderRadius: 12,
           height: 8,
           width: 47,
           marginBottom: 20,
         }}
         dotStyle={{
-          backgroundColor: colors.dotColor,
+          backgroundColor: theme.dotColor,
           borderRadius: 12,
           height: 8,
           width: 17,

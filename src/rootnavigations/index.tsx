@@ -3,12 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useContext, useEffect, useState} from 'react';
 import {ActivityIndicator, View} from 'react-native';
 import {AuthenticatedUserContext} from '../../App';
-import {colors} from '../constants/colors';
 import AuthStack from '../screens/Auth/Navigator';
 import MainStack from '../screens/Main/Navigator';
 
 const RootNavigation = () => {
-  const {user, setUser}: any = useContext(AuthenticatedUserContext);
+  const {user, setUser, theme}: any = useContext(AuthenticatedUserContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(authUser => {
@@ -20,7 +19,7 @@ const RootNavigation = () => {
 
   if (loading)
     <View>
-      <ActivityIndicator size={'small'} color={colors.buttonColor} />
+      <ActivityIndicator size={'small'} color={theme.buttonColor} />
     </View>;
 
   return (

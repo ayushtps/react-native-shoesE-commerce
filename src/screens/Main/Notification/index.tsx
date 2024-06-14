@@ -1,53 +1,57 @@
-import React from 'react';
-import {Image, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import React, { useContext } from 'react';
+import { Image, View } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { AuthenticatedUserContext } from '../../../../App';
 import Typography from '../../../component/common/Typography';
 import Header from '../../../component/layout/Header';
-import {colors} from '../../../constants/colors';
-import {NotificationList} from '../../../constants/data';
-import {images} from '../../../constants/icons';
-import {styles} from './styles';
+import { NotificationList } from '../../../constants/data';
+import { images } from '../../../constants/icons';
+import { styling } from './styles';
 
-const renderItem = ({item}: any) => {
-  return (
-    <View style={styles.notificationFlat}>
-      <View style={styles.notiImage}>
-        <Image source={item.img} />
-      </View>
-      <View>
-        <Typography
-          title={item.title}
-          size={14}
-          textStyle={styles.notiHeader}
-        />
-        <View style={styles.price}>
-          <Typography
-            title={item.price1}
-            size={14}
-            textStyle={[styles.txt, {marginRight: 10}]}
-          />
-          <Typography
-            title={item.price2}
-            size={14}
-            color={colors.peraTextColor}
-            textStyle={styles.txt}
-          />
-        </View>
-      </View>
-      <View style={styles.dotContainer}>
-        <Typography
-          title={item.min}
-          size={14}
-          color={colors.peraTextColor}
-          textStyle={[styles.txt, {marginBottom: 10}]}
-        />
-        <View style={styles.dot}></View>
-      </View>
-    </View>
-  );
-};
+
 
 const Notification = () => {
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
+  const renderItem = ({item}: any) => {
+    return (
+      <View style={styles.notificationFlat}>
+        <View style={styles.notiImage}>
+          <Image source={item.img} />
+        </View>
+        <View>
+          <Typography
+            title={item.title}
+            size={14}
+            textStyle={styles.notiHeader}
+          />
+          <View style={styles.price}>
+            <Typography
+              title={item.price1}
+              size={14}
+              textStyle={[styles.txt, {marginRight: 10}]}
+            />
+            <Typography
+              title={item.price2}
+              size={14}
+              color={theme.peraTextColor}
+              textStyle={styles.txt}
+            />
+          </View>
+        </View>
+        <View style={styles.dotContainer}>
+          <Typography
+            title={item.min}
+            size={14}
+            color={theme.peraTextColor}
+            textStyle={[styles.txt, {marginBottom: 10}]}
+          />
+          <View style={styles.dot}></View>
+        </View>
+      </View>
+    );
+  };
   return (
     <View style={styles.notificationContainer}>
       <View>
@@ -67,7 +71,7 @@ const Notification = () => {
               <Image source={images.EMPTY_LOGO} />
               <Typography
                 title={'Empty'}
-                color={colors.peraTextColor}
+                color={theme.peraTextColor}
                 size={16}
               />
             </View>

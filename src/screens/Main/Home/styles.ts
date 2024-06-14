@@ -1,13 +1,16 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/colors";
 import { fonts } from "../../../constants/fonts";
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
     homeContainer: {
       flex: 1,
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
+      // paddingTop:20,
+      // paddingLeft:20,
+      // paddingRight:20,
       padding: 20,
-      marginBottom: 95,
+      // paddingBottom:95,
+      // marginBottom: 95,
     },
     headerContainer: {
       flexDirection: 'row',
@@ -16,7 +19,7 @@ export const styles = StyleSheet.create({
       marginBottom: 24,
     },
     headerBack: {
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       padding: 10,
       height: 44,
       width: 44,
@@ -52,8 +55,8 @@ export const styles = StyleSheet.create({
       paddingLeft: 40,
       fontFamily: fonts.regular,
       paddingVertical: 14,
-      color: colors.headingTextColor,
-      backgroundColor: colors.secondColor,
+      color: theme.headingTextColor,
+      backgroundColor: theme.secondColor,
     },
     categoryContainer: {
       marginVertical: 24,
@@ -64,10 +67,10 @@ export const styles = StyleSheet.create({
       paddingVertical: 8,
       paddingHorizontal: 20,
       borderRadius: 40,
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
     },
     selectedItemContainer: {
-      backgroundColor: colors.buttonColor,
+      backgroundColor: theme.buttonColor,
     },
     itemText: {
       marginLeft: 10,
@@ -80,7 +83,7 @@ export const styles = StyleSheet.create({
     },
     renderCategory: {
       marginTop: 16,
-      marginBottom: 26,
+      marginBottom: 120,
     },
     cartCircle: {
       position: 'absolute',
@@ -90,7 +93,7 @@ export const styles = StyleSheet.create({
       width: 15,
       borderRadius: 40,
       zIndex: 999,
-      backgroundColor: colors.buttonColor,
+      backgroundColor: theme.buttonColor,
       justifyContent: 'center',
       alignItems: 'center',
     },

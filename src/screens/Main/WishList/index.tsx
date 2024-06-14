@@ -1,22 +1,24 @@
-import React from 'react';
-import { FlatList, Image, Pressable, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useContext} from 'react';
+import {FlatList, Image, Pressable, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import Typography from '../../../component/common/Typography';
 import Header from '../../../component/layout/Header';
-import { colors } from '../../../constants/colors';
-import { fonts } from '../../../constants/fonts';
-import { images } from '../../../constants/icons';
-import { deleteWish } from '../../../redux/slice/WishListSlice';
-import { RootState } from '../../../redux/store/store';
-import { styles } from './styles';
+import {fonts} from '../../../constants/fonts';
+import {images} from '../../../constants/icons';
+import {deleteWish} from '../../../redux/slice/WishListSlice';
+import {RootState} from '../../../redux/store/store';
+import {AuthenticatedUserContext} from '../../../../App';
+import {styling} from './styles';
 
 const WishList = () => {
   const {data} = useSelector((state: RootState) => state.WishList);
   const dispatch = useDispatch();
+  const {theme} = useContext(AuthenticatedUserContext);
+
+  const styles = styling(theme);
 
   const removeWish = (item: any) => {
     dispatch(deleteWish(item));
-    
   };
   const renderItem = ({item}: any) => {
     return (
@@ -33,7 +35,7 @@ const WishList = () => {
           <Typography
             title={'Best Seller'}
             size={12}
-            color={colors.buttonColor}
+            color={theme.buttonColor}
             textStyle={{fontFamily: fonts.regular}}
           />
           <Typography
@@ -69,10 +71,10 @@ const WishList = () => {
           )}
           ListEmptyComponent={() => (
             <View style={styles.emptyView}>
-              <Image source={images.EMPTY_LOGO} />
+              <Image source={images.EMPTY_LOGO}  tintColor={theme.tintColor}/>
               <Typography
                 title={'Empty'}
-                color={colors.peraTextColor}
+                color={theme.tintColor}
                 size={16}
               />
             </View>

@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../../constants/colors";
 import { fonts } from "../../../../constants/fonts";
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
     searchInner: {
       flexDirection: 'row',
     },
@@ -20,7 +19,7 @@ export const styles = StyleSheet.create({
       paddingLeft: 40,
       fontFamily: fonts.regular,
       paddingVertical: 14,
-      color: colors.headingTextColor,
-      backgroundColor: colors.secondColor,
+      color: theme.headingTextColor,
+      backgroundColor: theme.secondColor,
     },
   });

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, TextStyle} from 'react-native';
-import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
+import {AuthenticatedUserContext} from '../../../../App';
 
 type typoProps = {
   textStyle?: TextStyle | TextStyle[];
@@ -12,16 +12,17 @@ type typoProps = {
 
 const Typography = (props: typoProps) => {
   const {textStyle, title, size = 18, color = ''} = props;
-  const txtStyle = textStyles(size, color);
+  const {theme} = useContext(AuthenticatedUserContext);
+  const txtStyle = textStyles(size, color, theme);
 
   return <Text style={[txtStyle.textContainer, textStyle]}>{title}</Text>;
 };
 
-const textStyles = (size: number, color: string) =>
+const textStyles = (size: number, color: string, theme: any) =>
   StyleSheet.create({
     textContainer: {
       fontSize: size ? size : 18,
-      color: color ? color : colors.headingTextColor,
+      color: color ? color : theme.headingTextColor,
       fontFamily: fonts.medium,
     },
   });

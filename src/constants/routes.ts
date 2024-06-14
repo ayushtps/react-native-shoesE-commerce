@@ -12,4 +12,5 @@ export const SCREENS ={
     PRODUCT_DETAILS:'ProductDetail',
     SEARCH_SCREEN:'SearchScreen',
     PAYMENT:'Payment',
+    DRAWERNAV:'DrawerNav'
 }

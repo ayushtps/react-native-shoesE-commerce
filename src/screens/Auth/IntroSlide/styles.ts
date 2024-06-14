@@ -1,13 +1,12 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../../constants/colors";
 import { fonts } from "../../../constants/fonts";
 
-export const styles = StyleSheet.create({
+export const styling =(theme)=> StyleSheet.create({
     circle4: {
       height: 250,
       width: 250,
       borderRadius: 120,
-      backgroundColor: colors.dotColor,
+      backgroundColor: theme.dotColor,
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
@@ -27,7 +26,7 @@ export const styles = StyleSheet.create({
       height: 16,
       width: 16,
       borderRadius: 50,
-      backgroundColor: colors.circleColor,
+      backgroundColor: theme.circleColor,
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
@@ -39,7 +38,7 @@ export const styles = StyleSheet.create({
       height: 16,
       width: 16,
       borderRadius: 50,
-      backgroundColor: colors.buttonColor,
+      backgroundColor: theme.buttonColor,
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
@@ -50,7 +49,7 @@ export const styles = StyleSheet.create({
       height: 16,
       width: 16,
       borderRadius: 50,
-      backgroundColor: colors.buttonColor,
+      backgroundColor: theme.buttonColor,
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
@@ -64,7 +63,7 @@ export const styles = StyleSheet.create({
     },
     introContainer: {
       flex: 1,
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
     },
     slide: {
       flex: 1,

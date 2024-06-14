@@ -1,17 +1,16 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../../constants/colors";
 import { fonts } from "../../constants/fonts";
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
     paymentContainer: {
       flex: 1,
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
     },
     paymentInner: {
       padding: 20,
     },
     paymentDetails: {
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       paddingVertical: 16,
       paddingHorizontal: 20,
       marginTop: 24,
@@ -33,7 +32,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
     },
     logoBack: {
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
       borderRadius: 40,
       height: 30,
       width: 30,
@@ -57,7 +56,7 @@ export const styles = StyleSheet.create({
       marginTop: 5,
     },
     paymentImg: {
-      backgroundColor: colors.primaryColor,
+      backgroundColor: theme.primaryColor,
       borderRadius: 40,
       height: 40,
       width: 40,
@@ -65,7 +64,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
     },
     totalContainer: {
-      backgroundColor: colors.secondColor,
+      backgroundColor: theme.secondColor,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
       padding: 20,
@@ -82,12 +81,12 @@ export const styles = StyleSheet.create({
     extra: {
       paddingBottom: 10,
       borderBottomWidth: 1,
-      borderColor: colors.peraTextColor,
+      borderColor: theme.peraTextColor,
       borderStyle: 'dotted',
       marginBottom: 5,
     },
     containerStyle:{
-      backgroundColor:colors.secondColor,
+      backgroundColor:theme.secondColor,
       borderRadius:20,
       padding:20,
       marginHorizontal:20

@@ -1,11 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
 import {fonts} from '../../constants/fonts';
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
   containerStyle: {
     padding:20,
-    backgroundColor:colors.secondColor,
+    backgroundColor:theme.secondColor,
     borderTopLeftRadius:20,
     borderTopRightRadius:20,
     marginTop:'auto'
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
     marginBottom:10
   },
   searchContainer: {
-    backgroundColor: colors.primaryColor,
+    backgroundColor: theme.primaryColor,
     padding: 20,
     flex:1
   },
@@ -52,12 +51,12 @@ export const styles = StyleSheet.create({
     paddingLeft: 40,
     fontFamily: fonts.regular,
     paddingVertical: 14,
-    color: colors.headingTextColor,
-    backgroundColor: colors.secondColor,
+    color: theme.headingTextColor,
+    backgroundColor: theme.secondColor,
   },
   itemContainer: {
     marginHorizontal: 10,
-    backgroundColor: colors.secondColor,
+    backgroundColor: theme.secondColor,
     borderRadius: 16,
     width: 156,
     overflow: 'hidden',
@@ -72,7 +71,7 @@ export const styles = StyleSheet.create({
   addCartBtn: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.buttonColor,
+    backgroundColor: theme.buttonColor,
     borderTopLeftRadius: 20,
     height: 40,
     width: 39,
@@ -96,7 +95,7 @@ export const styles = StyleSheet.create({
     left: 10,
     top: 10,
     padding: 5,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: theme.primaryColor,
     borderRadius: 40,
     zIndex: 9999,
   },

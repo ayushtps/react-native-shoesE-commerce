@@ -1,12 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../../constants/colors';
 import {fonts} from '../../../constants/fonts';
 
-export const styles = StyleSheet.create({
+export const styling=(theme) => StyleSheet.create({
   cartContainer: {
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: colors.primaryColor,
+    backgroundColor: theme.primaryColor,
   },
   cartInner: {
     padding: 20,
@@ -25,7 +24,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    backgroundColor: colors.secondColor,
+    backgroundColor: theme.secondColor,
     height: 100,
     width: 100,
     borderRadius: 16,
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.medium,
   },
   minusIcon: {
-    backgroundColor: colors.buttonColor,
+    backgroundColor: theme.buttonColor,
     borderRadius: 40,
     height: 28,
     width: 28,
@@ -57,7 +56,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   totalContainer: {
-    backgroundColor: colors.secondColor,
+    backgroundColor: theme.secondColor,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     padding: 20,
@@ -75,7 +74,7 @@ export const styles = StyleSheet.create({
   extra: {
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderColor: colors.peraTextColor,
+    borderColor: theme.peraTextColor,
     borderStyle: 'dotted',
     marginBottom: 5,
   },
